@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import MonitoredTimeoutComponent from "./MonitoredTimeoutComponent";
 
 import "./styles.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 const App = () => {
   const [count, setCount] = useState(0);
@@ -12,7 +13,7 @@ const App = () => {
     <div className="App">
       <h1>Counter</h1>
       <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
+      <button className="btn btn-primary" onClick={() => setCount(count + 1)}>Click me</button>
       <MonitoredTimeoutComponent
         monitor={() => console.log(`monitoring: ${count}`)}
       />

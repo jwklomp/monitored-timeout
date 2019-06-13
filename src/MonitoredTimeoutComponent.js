@@ -13,7 +13,7 @@ import useModal from "./hooks/useModal";
  * @param {number} warningDuration milliseconds the warning occurs before the timeout, defaults to 1000 ms.
  * @param {number} timeoutIn milliseconds till the timeout, defaults to 10000 ms.
  */
-const MonitoredTimeoutComponent = 
+const MonitoredTimeoutComponent =
   ({
     monitor,
     monitorDuration,
@@ -22,13 +22,13 @@ const MonitoredTimeoutComponent =
   }) => {
 
     const { isShowing, showModal, content } = useModal();
-    const onWarning = () => showModal(true, "Warning modal");
-    const onTimeout = () => showModal(true, "Timout modal");
+    const onWarning = () => showModal(true, "Warning, your session will time out soon.");
+    const onTimeout = () => showModal(true, "Your session has expired.");
 
     useTimeout(onTimeout, timeoutIn);
     useTimeout(monitor, Math.max(timeoutIn - monitorDuration, 0));
     useTimeout(onWarning, Math.max(timeoutIn - warningDuration, 0));
-    return (<Modal isShowing={isShowing} showModal={showModal} content = {content} />);
+    return (<Modal isShowing={isShowing} showModal={showModal} content={content} />);
   };
 
 MonitoredTimeoutComponent.propTypes = {
