@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTimeout } from "./hooks/useTimeout";
+import Modal from "./Modal";
+import useModal from "./hooks/useModal";
 
 /**
  * Arguments are “dynamic”, so code can handle changes in callback or delay.
@@ -11,28 +13,26 @@ import { useTimeout } from "./hooks/useTimeout";
  * @param {number} warningDuration milliseconds the warning occurs before the timeout, defaults to 1000 ms.
  * @param {number} timeoutIn milliseconds till the timeout, defaults to 10000 ms.
  */
-const MonitoredTimeoutComponent = React.memo(
+const MonitoredTimeoutComponent = 
   ({
     monitor,
-    onWarning,
-    onTimeout,
     monitorDuration,
     warningDuration,
     timeoutIn
   }) => {
+
+    const { isShowing, showModal, content } = useModal();
+    const onWarning = () => showModal(true, "Warning modal");
+    const onTimeout = () => showModal(true, "Timout modal");
+
     useTimeout(onTimeout, timeoutIn);
     useTimeout(monitor, Math.max(timeoutIn - monitorDuration, 0));
     useTimeout(onWarning, Math.max(timeoutIn - warningDuration, 0));
-    //const [count, setCount] = useState(0);
-    //monitor();
-    return <p>{"hello"}</p>;
-  }
-);
+    return (<Modal isShowing={isShowing} showModal={showModal} content = {content} />);
+  };
 
 MonitoredTimeoutComponent.propTypes = {
   monitor: PropTypes.func.isRequired,
-  onWarning: PropTypes.func.isRequired,
-  onTimeout: PropTypes.func.isRequired,
   monitorDuration: PropTypes.number,
   warningDuration: PropTypes.number,
   timeoutIn: PropTypes.number
@@ -40,8 +40,6 @@ MonitoredTimeoutComponent.propTypes = {
 
 MonitoredTimeoutComponent.defaultProps = {
   monitor: () => console.log("onMonitor"),
-  onWarning: () => console.log("onWarning"),
-  onTimeout: () => console.log("onTimeout"),
   monitorDuration: 9000,
   warningDuration: 4000,
   timeoutIn: 10000

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const Modal = ({ isShowing, hide }) =>
+const Modal = ({ isShowing, showModal, content }) =>
   isShowing
     ? ReactDOM.createPortal(
         <React.Fragment>
@@ -20,12 +20,12 @@ const Modal = ({ isShowing, hide }) =>
                   className="modal-close-button"
                   data-dismiss="modal"
                   aria-label="Close"
-                  onClick={hide}
+                  onClick={() => showModal(false, null)}
                 >
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <p>Hello, I'm a modal.</p>
+              {content}
             </div>
           </div>
         </React.Fragment>,
