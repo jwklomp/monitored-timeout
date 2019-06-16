@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const Modal = ({ isShowing, showModal, content }) =>
+const Modal = React.memo(({ isShowing, showModal, content }) =>
   isShowing
     ? ReactDOM.createPortal(
       <React.Fragment>
@@ -35,6 +35,6 @@ const Modal = ({ isShowing, showModal, content }) =>
       </React.Fragment>,
       document.body
     )
-    : null;
+    : null);
 
 export default Modal;
