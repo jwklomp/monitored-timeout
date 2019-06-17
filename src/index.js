@@ -7,12 +7,12 @@ import "bootstrap/dist/css/bootstrap.css";
 
 const App = () => {
   const [count, setCount] = useState(0);
-  const [date, setDate] = useState(Date.now() + 10000);
+  const [date, setDate] = useState(Date.now() + 15000);
 
 
   const handleClick = () => {
     setCount(count + 1);
-    setDate(Date.now() + 10000);
+    setDate(Date.now() + 15000);
   }
 
   // most elegant would be to have the rerender coincide with user input, that way nothing has to be reset or restarted manually
