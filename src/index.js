@@ -7,12 +7,12 @@ import "bootstrap/dist/css/bootstrap.css";
 
 const App = () => {
   const [count, setCount] = useState(0);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(Date.now() + 10000);
 
 
   const handleClick = () => {
     setCount(count + 1);
-    setDate(new Date());
+    setDate(Date.now() + 10000);
   }
 
   // most elegant would be to have the rerender coincide with user input, that way nothing has to be reset or restarted manually
@@ -21,9 +21,9 @@ const App = () => {
     <div className="App">
       <h1>Counter</h1>
       <p>You clicked {count} times</p>
-      <button className="btn btn-primary" onClick={() => setCount(count + 1)}>Click me</button>
+      <button className="btn btn-primary" onClick={handleClick}>Click me</button>
       <MonitoredTimeoutComponent
-        monitor={() => console.log(`monitoring: ${count}`)}
+        monitorDate= {date}
       />
     </div>
   );

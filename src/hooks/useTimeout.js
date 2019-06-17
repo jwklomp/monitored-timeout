@@ -8,9 +8,11 @@ import { useEffect } from "react";
  */
 export const useTimeout = (callback, delay = 1000) => {
   useEffect(() => {
-    const timer = setTimeout(() => {
-      callback();
-    }, delay);
-    return () => clearTimeout(timer);
+    if (delay > 0) {
+      const timer = setTimeout(() => {
+        callback();
+      }, delay);
+      return () => clearTimeout(timer);
+    }
   });
 };
