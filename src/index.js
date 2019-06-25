@@ -15,8 +15,6 @@ const App = () => {
     setDate(Date.now() + 15000);
   }
 
-  // most elegant would be to have the rerender coincide with user input, that way nothing has to be reset or restarted manually
-  // it will just follow the flow of the functional component/hooks
   return (
     <div className="App">
       <h1>Counter</h1>

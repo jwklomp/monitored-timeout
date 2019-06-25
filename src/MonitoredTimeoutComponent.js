@@ -1,34 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTimeout } from "./hooks/useTimeout";
-import Modal from "./Modal";
+import ModalComponent from "./ModalComponent";
 import useModal from "./hooks/useModal";
 import AutoCountdownComponent from "./AutoCountdownComponent";
 
 /**
- * Arguments are “dynamic”, so code can handle changes in callback or delay.
+ * Component that sets up a timeout and displays a modal when with a warning message and timeout message.
  * @param {function} monitorDate, function to execute as a monitorDate
- * @param {number} warningDuration milliseconds the warning occurs before the timeout, defaults to 1000 ms.
+ * @param {number} warningDuration milliseconds the warning occurs before the timeout, defaults to 10000 ms.
  */
 const MonitoredTimeoutComponent = React.memo(
   ({
     monitorDate,
-    monitorDuration,
     warningDuration
   }) => {
     const timeoutIn = monitorDate - Date.now();
 
-    const { isShowing, showModal, content } = useModal();
-
     const warningContent = () =>
       <p>Your session will expire in: <AutoCountdownComponent countdownFrom={warningDuration} /> </p>;
 
+    const { isShowing, showModal, content } = useModal();
     const onWarning = () => showModal(true, warningContent());
     const onTimeout = () => showModal(true, "Your session has expired.");
 
     useTimeout(onTimeout, timeoutIn);
     useTimeout(onWarning, Math.max(timeoutIn - warningDuration, 0));
-    return (<Modal isShowing={isShowing} showModal={showModal} content={content} />);
+    return (<ModalComponent isShowing={isShowing} showModal={showModal} content={content} />);
   });
 
 MonitoredTimeoutComponent.propTypes = {
