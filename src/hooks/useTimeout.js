@@ -8,7 +8,7 @@ import { useEffect } from "react";
  */
 export const useTimeout = (callback, delay = 1000) => {
   useEffect(() => {
-    if (delay > 0) {
+    if (delay > 0) { // note the if condition here. It must be inside the useEffect. 
       const timer = setTimeout(() => {
         callback();
       }, delay);

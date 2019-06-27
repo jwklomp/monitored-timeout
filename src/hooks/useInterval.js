@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react"; // useRef = 
 
 /**
  * Hook that sets up an interval and runs the callback on each interval.

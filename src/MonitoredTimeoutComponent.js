@@ -7,7 +7,8 @@ import AutoCountdownComponent from "./AutoCountdownComponent";
 
 /**
  * Component that sets up a timeout and displays a modal when with a warning message and timeout message.
- * @param {function} monitorDate, function to execute as a monitorDate
+ * Note that when either monitorDate or warningDuration changes, the component will automatically rerender (default React behaviour).
+ * @param {number} monitorDate date to monitor in epoch format
  * @param {number} warningDuration milliseconds the warning occurs before the timeout, defaults to 10000 ms.
  */
 const MonitoredTimeoutComponent = React.memo(
@@ -21,6 +22,7 @@ const MonitoredTimeoutComponent = React.memo(
       <p>Your session will expire in: <AutoCountdownComponent countdownFrom={warningDuration} /> </p>;
 
     const { isShowing, showModal, content } = useModal();
+ 
     const onWarning = () => showModal(true, warningContent());
     const onTimeout = () => showModal(true, "Your session has expired.");
 
