@@ -7,6 +7,8 @@ import { useEffect, useRef } from "react"; // useRef =
  * @param {number} delay in milliseconds, defaults to 1000 ms.
  */
 export const useInterval = (callback, delay = 1000) => {
+  // useRef returns a mutable ref object whose .current property is initialized to the passed argument (initialValue). 
+  // The returned object will persist for the full lifetime of the component.
   const savedCallback = useRef();
 
   // Remember the latest callback. Reruns when callback changes (because specified in dependencies array).

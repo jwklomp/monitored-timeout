@@ -13,6 +13,7 @@ const useModal = () => {
     setContent(content);
   }
 
+  // Return an object containing the state and properties, so other components can access them.
   return {
     isShowing,
     showModal,

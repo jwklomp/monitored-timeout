@@ -10,7 +10,7 @@ const AutoCountdownComponent = React.memo(
     const [count, setCount] = useState(countdownFrom);
 
     useInterval(() => {
-      setCount(count - ONE_SECOND);
+      setCount(count > countdownTo ? count - ONE_SECOND : count);
     }, ONE_SECOND);
 
     return <React.Fragment>{formatFn(count)}</React.Fragment>;

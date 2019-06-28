@@ -21,7 +21,7 @@ const MonitoredTimeoutComponent = React.memo(
     const warningContent = () =>
       <p>Your session will expire in: <AutoCountdownComponent countdownFrom={warningDuration} /> </p>;
 
-    const { isShowing, showModal, content } = useModal();
+    const { isShowing, showModal, content } = useModal(); // note the es6 object destructuring
  
     const onWarning = () => showModal(true, warningContent());
     const onTimeout = () => showModal(true, "Your session has expired.");
